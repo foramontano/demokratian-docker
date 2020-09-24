@@ -1,6 +1,8 @@
 # demokratian-lacorriente
 
-Se describen los pasos para realizar una instalación de [Demokratian](http://demokratian.org/) usando docker-compose. La aplicación se realizará para crear la plataforma de votación telemática de [La Corriente](https://lacorrientecoop.es/).
+Se describen los pasos para realizar una instalación de [Demokratian](http://demokratian.org/) usando [**docker**](https://www.docker.com/) y [**docker-compose**](https://docs.docker.com/compose/). 
+
+Se utilizarán Demokratian para crear la plataforma de votación telemática de [La Corriente](https://lacorrientecoop.es/).
 
 En el ejemplo partiré de un VPS con  **arch=amd64** (Ubuntu 20.04.1 LTS x86_64 en este ejemplo  ) con acceso root. 
 ## ¿Qué necesitaremos?
@@ -52,7 +54,7 @@ Necesitamos que el usuario de trabajo tenga acceso de trabajar con docker para n
 sudo usermod -aG docker lacorriente 
 ```
 
-A partir de este momento trabajaremos con el usuario **lacorriente**  (que ya tiene permisos para trabajar con **docker**)
+> A partir de este momento trabajaremos con el usuario **lacorriente**  (que ya tiene permisos para trabajar con **docker**)
 
 ## Descargar fuentes Demokratian
 Con las herramientas **git** instaladas ya podemos descargar el código fuente de Demokratian. Para ello accedemos al repositorio (https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/) y obtenermos repositorio a clonar pulsando sobre el botón **Clone** y lo llebamos a nuestro servidor. Previamente crearemos un directorio sobre el que trabajar (**demokratian-docker**). 
