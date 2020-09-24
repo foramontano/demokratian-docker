@@ -8,12 +8,12 @@ En el ejemplo partiré de un VPS con  **arch=amd64** (Ubuntu 20.04.1 LTS x86_64 
 ## ¿Qué necesitaremos?
 - Un usuario sobre el que trabajar: *lacorriente* (lo suponemos ya creado)
 - Tener instalada una versión de [**docker**](https://docker.com) y de [**docker-compose**](https://docs.docker.com/compose/install/). 
-- Incluir el usuario (*lacorriente*) en el grupo *docker* que se creó en la anterior instalación.
+- Incluir el usuario (*lacorriente*) en el **grupo *docker*** que se creó en la instalación de docker.
 - Tener instalada una versión actualizada de [**git**](https://git-scm.com/download/linux). 
 - Descargarnos los [fuentes de Demokratian](https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/): Para este ejemplo partiré de la versión 3.1.0
 - Elegir la imagen LAMP que dará cobertura a la aplicación Demokratian
 - Crear y configurar el fichero *docker-compose.yml* que permita el despliegue de Demokratian.
-- Realizar ajustes para el buen funcionamiento
+- Realizar ajustes para el buen funcionamiento (Base de datos y código PHP).
 
 ## Instalación de DOCKER
 Resumo lo que se indica en [la página oficial de docker](https://docs.docker.com/engine/install/ubuntu/)
