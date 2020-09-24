@@ -5,10 +5,10 @@ Se describen los pasos para realizar una instalación de [Demokratian](http://de
 En el ejemplo partiré de un VPS con  **arch=amd64** (Ubuntu 20.04.1 LTS x86_64 en este ejemplo  ) con acceso root. 
 ## ¿Qué necesitaremos?
 - Un usuario sobre el que trabajar: *lacorriente* (lo suponemos ya creado)
-- Tener instalada una versión de [**docker**](https://docker.com) y de **docker-compose**. Partiremos de la última.
+- Tener instalada una versión de [**docker**](https://docker.com) y de [**docker-compose**](https://docs.docker.com/compose/install/). 
 - Incluir el usuario (*lacorriente*) en el grupo *docker* que se creó en la anterior instalación.
-- Tener instalada una versión actualizada de [git](https://git-scm.com/). Partiremos de la última.
-- Descargarnos los [fuentes de Demokratian](https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/): Para este ejemplo partiré de la versión 2.3.1
+- Tener instalada una versión actualizada de [**git**](https://git-scm.com/download/linux). 
+- Descargarnos los [fuentes de Demokratian](https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/): Para este ejemplo partiré de la versión 3.1.0
 - Elegir la imagen LAMP que dará cobertura a la aplicación Demokratian
 - Crear y configurar el fichero *docker-compose.yml* que permita el despliegue de Demokratian.
 - Realizar ajustes para el buen funcionamiento
@@ -154,8 +154,14 @@ SHOW VARIABLES LIKE 'sql_mode';
 # Del valor obtenido quitamos, la directiva STRICT_TRANS_TABLES y actualizamos el valor.
 set global sql_mode='ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 ```
-A partir de aquí ya podríamos instalar y utilizar la aplicación **demokratian** desde la web (**http://localhost:8007**).
+A partir de aquí ya podríamos instalar la aplicación **demokratian** desde la web (**http://localhost:8007**).
 ### Código fuente Demokratian
-fasfsadfsd
-## Reconocimietos
+Por la versión de Base de datos que utilizamos (5.7.30) necesitaremos hacer un cambio en los fuentes de (./admin/candidatos.php)
+```
+# Sustituimos la ($numero_id_vut ='';) por:
+$numero_id_vut =0;
+
+```
+A partir de ahí, el sistema debiera funcionar correctamente y podríamos utilizarla según las funcionalidades descritas en [el manual de ayuda] (https://docs.google.com/document/d/1Odyw5T7WFL82-tuo3Cgau_UzNSL-7LzCrisxAuAihg0/pub).
+## Reconocimientos
 Este repositorio es posible gracias al apoyo de [Carlos Salgado](http://carlos-salgado.es/) *alma mater* de [Demokratian](http://demokratian.org/)
