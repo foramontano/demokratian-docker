@@ -160,9 +160,10 @@ A partir de aquí ya podríamos instalar la aplicación **demokratian** desde la
 ### Código fuente Demokratian
 Por la versión de Base de datos que utilizamos (5.7.30) necesitaremos hacer un cambio en los fuentes de (./admin/candidatos.php)
 ```
-# Sustituimos la ($numero_id_vut ='';) por:
+# Dentro de código de candidaros.php Sustituimos la orden: $numero_id_vut =''; por
+...
 $numero_id_vut =0;
-
+...
 ```
 A partir de ahí, el sistema debiera funcionar correctamente y podríamos utilizarla según las funcionalidades descritas en [el manual de ayuda] (https://docs.google.com/document/d/1Odyw5T7WFL82-tuo3Cgau_UzNSL-7LzCrisxAuAihg0/pub).
 ## Reconocimientos
