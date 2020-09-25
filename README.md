@@ -107,7 +107,7 @@ services:
     restart: always
 
 ```
-A partir de aquí ya podemos desplegar la aplicación. No obstante **recordar que es neceario tener abierto en el firewall el puerto que que hemos mapeado en el fichero docker-compose** (en este caso el **puerto 8001**)
+A partir de aquí ya podemos desplegar la aplicación. No obstante, **recordar que es neceario tener abierto en el firewall el puerto que hemos mapeado en el fichero docker-compose** (en este caso el **puerto 8001**)
 ```
 docker-compose up -d
 ```
