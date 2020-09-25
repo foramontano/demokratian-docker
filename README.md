@@ -39,7 +39,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 # Comprobar el estado de DOCKER
 sudo systemctl status docker
 ```
-Adicionalmente, si queremos aprovechar la utilizad docker-compose (que se apoya en docker) necesitaríamos instalarla:
+Adicionalmente, para **aprovechar la utilizad docker-compose** (que se apoya en docker) a la hora de desplegar la aplicación necesitaríamos instalarla:
 ```
  sudo apt install docker-compose
 ```
