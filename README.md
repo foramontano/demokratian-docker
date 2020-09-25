@@ -1,14 +1,14 @@
-# demokratian-lacorriente
+# demokratian-docker
 
 Se describen los pasos para realizar una instalación de [Demokratian](http://demokratian.org/) usando [**docker**](https://www.docker.com/) y [**docker-compose**](https://docs.docker.com/compose/). 
 
-Se utilizarán Demokratian para crear la plataforma de votación telemática de [La Corriente](https://lacorrientecoop.es/).
+Se utilizarán Demokratian para crear la plataforma de votación telemática.
 
 En el ejemplo partiré de un VPS con  **arch=amd64** (Ubuntu 20.04.1 LTS x86_64 en este ejemplo  ) con acceso root. 
 ## ¿Qué necesitaremos?
-- Un usuario sobre el que trabajar: *lacorriente* (lo suponemos ya creado)
+- Un usuario sobre el que trabajar (lo suponemos ya creado)
 - Tener instalada una versión de [**docker**](https://docker.com) y de [**docker-compose**](https://docs.docker.com/compose/install/). 
-- Incluir el usuario (*lacorriente*) en el **grupo *docker*** que se creó en la instalación de docker.
+- Incluir el usuario (*nombre-usuario*) en el **grupo *docker*** que se creó en la instalación de docker.
 - Tener instalada una versión actualizada de [**git**](https://git-scm.com/download/linux). 
 - Descargarnos los [fuentes de Demokratian](https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/): Para este ejemplo partiré de la versión 3.1.0
 - Elegir la imagen LAMP que dará cobertura a la aplicación Demokratian
@@ -28,7 +28,8 @@ sudo apt-get install \
     curl \
     gnupg-agent \
     software-properties-common
-# Añadir la clave oficial GPG de docker
+# Añadir la clave oficial GPG de dock
+er
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 #Se agrega el repositorio de docker
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -51,10 +52,10 @@ sudo apt-get install git
 ## Incluir usuario en grupo docker
 Necesitamos que el usuario de trabajo tenga acceso de trabajar con docker para no tener que tener privilegios de root:
 ```
-sudo usermod -aG docker lacorriente 
+sudo usermod -aG docker nombre-usuario 
 ```
 
-> A partir de este momento trabajaremos con el usuario **lacorriente**  (que ya tiene permisos para trabajar con **docker**)
+> A partir de este momento trabajaremos con el usuario ***nombre-usuario***  (que ya tiene permisos para trabajar con **docker**)
 
 ## Descargar fuentes Demokratian
 Con las herramientas **git** instaladas ya podemos descargar el código fuente de Demokratian. Para ello accedemos al repositorio (https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/) y obtenermos repositorio a clonar pulsando sobre el botón **Clone** y lo llebamos a nuestro servidor. Previamente crearemos un directorio sobre el que trabajar (**demokratian-docker**). 
@@ -101,12 +102,12 @@ services:
        - ./demokratian_votaciones:/app # Fuentes de Demokratian en el host (directorio demokratian_votaciones) y correspondencia de directorio en el container (directorio /app)
        - ./mysql:/var/lib/mysql # Información de MySQL en el host (directorio mysql) y correspondencia de directorio en el container (directorio /var/lib/mysql)
     ports:
-      - "8007:80" # Puertos sobre el escucha Apache (puerto en el host -8007- y puerto en el container -80-)
-      - "3306:3306" # Puertos sobre el escucha Mysql (puerto en el host -3306- y en el container -3306-) 
+      - "8001:80" # Puertos sobre el escucha Apache (puerto en el host -8001- y puerto en el container -80-)
+#      - "3306:3306" # Puertos sobre el escucha Mysql (puerto en el host -3306- y en el container -3306-) 
     restart: always
 
 ```
-A partir de aquí ya podemos desplegar la aplicación
+A partir de aquí ya podemos desplegar la aplicación. No obstante **recordar que es neceario tener abierto en el firewall el puerto que que hemos mapeado en el fichero docker-compose** (en este caso el **puerto 8001**)
 ```
 docker-compose up -d
 ```
@@ -114,12 +115,12 @@ Y después de un rato (la primer vez tardará más pues se tiene que descargar l
 ```
 docker ps -a
 CONTAINER ID        IMAGE                         COMMAND             CREATED              STATUS              PORTS                                          NAMES
-8ea8b397eac1        mattrayner/lamp:latest-1804   "/run.sh"           About a minute ago   Up About a minute   0.0.0.0:3306->3306/tcp, 0.0.0.0:8007->80/tcp   lamp-demokratian
+8ea8b397eac1        mattrayner/lamp:latest-1804   "/run.sh"           About a minute ago   Up About a minute   0.0.0.0:3306->3306/tcp, 0.0.0.0:8001->80/tcp   lamp-demokratian
 ```
-Vemos que el contenedor se llama **lamp-demokratian** y por el Status vemos que está **UP**; es decir ya podríamos acceder a demokratian; en este caso debería funcionar en la URL **http://localhost:8007/** (el port que configuramos en docker-compose.yml)
+Vemos que el contenedor se llama **lamp-demokratian** y por el Status vemos que está **UP**; es decir ya podríamos acceder a demokratian; en este caso debería funcionar en la URL **http://localhost:8001/** (el port que configuramos en docker-compose.yml)
 Podemos comprobarlo en la línea de comandos 
 ```
-curl http://localhost:8007/
+curl http://localhost:8001/
 ```
 
 Si necesatamos acceder a la base de datos podemos aceder a través de la utilidad phpmyadmin. Podremos conocer el usuario y la contraseña de administración si miramos en los logs del contenedor.
@@ -136,11 +137,11 @@ MySQL user 'root' has no password but only allows local connections
 ...
 
 ```
-En este caso en particular, teniendo en cuenta la información del log, podríamos Administrar MySQL con **phpmyadmin** mediante la URL **http://localhost:8007/phpmyadmin** con usuario (**admin**) y password (**Ii0U9KGcgMLh**).
+En este caso en particular, teniendo en cuenta la información del log, podríamos Administrar MySQL con **phpmyadmin** mediante la URL **http://localhost:8001/phpmyadmin** con usuario (**admin**) y password (**Ii0U9KGcgMLh**).
 ## Ajustes
 ### Base de Datos
 Antes de poder instalar y utilizar demokratian necesitaremos:
-- Crear una base de datos dentro de Mysql (a través de la utilidad phpmyadmin - **http://localhost:8007/phpmyadmin**)
+- Crear una base de datos dentro de Mysql (a través de la utilidad phpmyadmin - **http://localhost:8001/phpmyadmin**)
 - Crear un usuario de base de datos
 - Dar permisos al usuario sobre la base de datos
 
@@ -156,7 +157,7 @@ SHOW VARIABLES LIKE 'sql_mode';
 # Del valor obtenido quitamos, la directiva STRICT_TRANS_TABLES y actualizamos el valor.
 set global sql_mode='ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 ```
-A partir de aquí ya podríamos instalar la aplicación **demokratian** desde la web (**http://localhost:8007**).
+A partir de aquí ya podríamos instalar la aplicación **demokratian** desde la web (**http://localhost:8001**).
 ### Código fuente Demokratian
 Por la versión de Base de datos que utilizamos (5.7.30) necesitaremos hacer un cambio en los fuentes de (./admin/candidatos.php)
 ```
@@ -166,5 +167,6 @@ $numero_id_vut =0;
 ...
 ```
 A partir de ahí, el sistema debiera funcionar correctamente y podríamos utilizarla según las funcionalidades descritas en [el manual de ayuda] (https://docs.google.com/document/d/1Odyw5T7WFL82-tuo3Cgau_UzNSL-7LzCrisxAuAihg0/pub).
+
 ## Reconocimientos
 Este repositorio es posible gracias al apoyo de [Carlos Salgado](http://carlos-salgado.es/) *alma mater* de [Demokratian](http://demokratian.org/)
