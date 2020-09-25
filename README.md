@@ -87,8 +87,14 @@ Component | `latest-1404` | `latest-1604` | `latest-1804`
 
 Eligiremos el tag correspondiente según nuestros intereses.
 
-## Despliegue
+## Despliegue de Demokratian en servidor LAMP
 En este ejemplo vamos a desplegar Demokratian en el puerto 8001 del servidor host, con lo que **es neceario tener abierto en el firewall dicho puerto**.
+
+Por otra parte, en nuestro caso utilizaremos la imagen:tag **mattrayner/lamp:latest-1804**:
+
+A continuación se muestran las dos opciones de despliegue:
+- Despligue con **docker**
+- Despliegue con **docker-compose**
 
 ### Despligue con docker
 Si queremos desplegar Demokratian con docker hemos de ejecutar:
@@ -101,7 +107,6 @@ En el comando docker realizamos el mapeo entre puerto en el host -8001- y puerto
 
 ### Despliegue con docker-compose.yml
 Dentro del directorio **demokratian-docker** creamos el fichero **docker-compose.yml** y realizaremos los ajustes que consideremos necesarios.
-En nuestro caso utilizaremos la imagen:tag **mattrayner/lamp:latest-1804**:
 
 ```
 version: '3'
