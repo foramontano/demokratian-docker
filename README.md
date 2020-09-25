@@ -87,7 +87,19 @@ Component | `latest-1404` | `latest-1604` | `latest-1804`
 
 Eligiremos el tag correspondiente según nuestros intereses.
 
-## docker-compose.yml
+## Despliegue
+En este ejemplo vamos a desplegar Demokratian en el puerto 8001 del servidor host, con lo que **es neceario tener abierto en el firewall dicho puerto**.
+
+### Despligue con docker
+Si queremos desplegar Demokratian con docker hemos de ejecutar:
+
+```
+docker run -i -t -p "8001:80" -v ${PWD}/demokratian_votaciones:/app -v ${PWD}/mysql:/var/lib/mysql mattrayner/lamp:latest-1804
+
+```
+En el comando docker realizamos el mapeo entre puerto en el host -8001- y puerto en el container -80-.
+
+### Despliegue con docker-compose.yml
 Dentro del directorio **demokratian-docker** creamos el fichero **docker-compose.yml** y realizaremos los ajustes que consideremos necesarios.
 En nuestro caso utilizaremos la imagen:tag **mattrayner/lamp:latest-1804**:
 
@@ -107,7 +119,7 @@ services:
     restart: always
 
 ```
-A partir de aquí ya podemos desplegar la aplicación. No obstante, **recordar que es neceario tener abierto en el firewall el puerto que hemos mapeado en el fichero docker-compose** (en este caso el **puerto 8001**)
+A partir de aquí ya podemos desplegar la aplicación. 
 ```
 docker-compose up -d
 ```
