@@ -100,7 +100,7 @@ A continuación se muestran las dos opciones de despliegue:
 Si queremos desplegar Demokratian con docker hemos de ejecutar:
 
 ```
-docker run -i -t -p "8001:80" -v ${PWD}/demokratian_votaciones:/app -v ${PWD}/mysql:/var/lib/mysql mattrayner/lamp:latest-1804
+docker run -i -t --name lamp-demokratian -p "8001:80" -v ${PWD}/demokratian_votaciones:/app -v ${PWD}/mysql:/var/lib/mysql -d mattrayner/lamp:latest-1804
 
 ```
 En el comando docker realizamos el mapeo entre puerto en el host -8001- y puerto en el container -80-.
@@ -128,7 +128,8 @@ A partir de aquí ya podemos desplegar la aplicación.
 ```
 docker-compose up -d
 ```
-Y después de un rato (la primer vez tardará más pues se tiene que descargar la imagen) ya podemos comprobar que la aplicación está funcionando en un contenedor.
+
+ Ya haya sido con docker, o con docker-compose el despliegue de Demokratian (la primer vez tardará más pues se tiene que descargar la imagen) ya podemos comprobar que la aplicación está funcionando en un contenedor.
 ```
 docker ps -a
 CONTAINER ID        IMAGE                         COMMAND             CREATED              STATUS              PORTS                                          NAMES
