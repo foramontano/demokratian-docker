@@ -58,14 +58,15 @@ sudo usermod -aG docker nombre-usuario
 > A partir de este momento trabajaremos con el usuario ***nombre-usuario***  (que ya tiene permisos para trabajar con **docker**)
 
 ## Descargar fuentes Demokratian
-Con las herramientas **git** instaladas ya podemos descargar el código fuente de Demokratian. Para ello accedemos al repositorio (https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/) y obtenermos repositorio a clonar pulsando sobre el botón **Clone** y lo llebamos a nuestro servidor. Previamente crearemos un directorio sobre el que trabajar (**demokratian-docker**). 
+Con las herramientas **git** instaladas ya podemos descargar el código fuente. Para ello accedemos al [repositorio de Demokratian](https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/) y lo *clonamos* (pulsando sobre el botón **Clone**) y copiamos el comando de clonación y nos lo llevamos a nuestro servidor. Previamente habremos creado un directorio sobre el que trabajar (**demokratian-docker**). 
 ```
 mkdir demokratian-docker
 cd demokratian-docker
-git clone https://bitbucket.org/csalgadow/demokratian_votaciones.git
+# Comando de clonación obtenido en el repositorio de Demokratian
+git clone https://bitbucket.org/csalgadow/demokratian_votaciones.git   
 ```
 ## Imagen para Demokratian
-Como se comenta en el fichero [README.md] (https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/README.md) del repositorio, para el buen funcionamiento de Demokratian se ***Necesita un servidor apache con php5 y una base de datos mysql***. Es decir un servidor LAMP que cumpla esos requisistos sería suficiente.
+Como se comenta en el fichero [README.md](https://bitbucket.org/csalgadow/demokratian_votaciones/src/master/README.md) del repositorio de Demokratian, para el buen funcionamiento de Demokratian se ***Necesita un servidor apache con php7.2 y una base de datos mysql***. Es decir, un *servidor LAMP* que cumpla esos requisistos sería suficiente.
 De entre la imágenes de docker que ofrecen un servidor lamp completo; ejecutamos:
 ```
 docker search lamp
@@ -74,7 +75,7 @@ mattrayner/lamp             A simple LAMP docker image running the prere…   22
 linode/lamp                 LAMP on Ubuntu 14.04.1 LTS Container            178
 ...
 ```
-Nos quedamos con la primera [**mattrayner/lamp**](https://hub.docker.com/r/mattrayner/lamp), aunque para utilizar la imgen iremos a la página de [github](https://github.com/mattrayner/docker-lamp). Esta imagen, adicionalmente instala la utilidad **phpmyadmin* para gestionar la base de datos MySQL desde la web. 
+Nos quedamos con la primera [**mattrayner/lamp**](https://hub.docker.com/r/mattrayner/lamp) que está muy recomendada, aunque para conocer el funcionamiento de la imagen y utilizarla iremos a la página de [github](https://github.com/mattrayner/docker-lamp). Esta imagen, adicionalmente, instala la utilidad **phpmyadmin** que nos servirá como cliente con el que gestionar la base de datos MySQL desde la web. 
 
 Para este repositorio [se ofrecen tres versiones](https://github.com/mattrayner/docker-lamp/blob/master/README.md): 
 
