@@ -177,6 +177,9 @@ SHOW VARIABLES LIKE 'sql_mode';
 set global sql_mode='ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 ```
 A partir de aquí ya podríamos instalar la aplicación **demokratian** desde la web (**http://localhost:8001**).
+
+> Recordar que cada vez que se cree el contenedor (bien la primera vez, o pq se ha eliminado), es necesario que la directiva STRICT_TRANS_TABLE no esté en la variable sql-mode de MySql
+
 ### Código fuente Demokratian
 Por la versión de Base de datos que utilizamos (5.7.30) necesitaremos hacer un cambio en los fuentes de (./admin/candidatos.php)
 ```
