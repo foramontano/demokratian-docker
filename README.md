@@ -164,7 +164,7 @@ Antes de poder instalar y utilizar demokratian necesitaremos:
 - Crear un usuario de base de datos
 - Dar permisos al usuario sobre la base de datos
 
-Otro ajusta a tener en cuenta está realacionado con la Base de Datos. Debemos [**desactivar la directiva STRICT_TRANS_TABLES**](https://stackoverflow.com/questions/40881773/how-to-turn-on-off-mysql-strict-mode-in-localhost-xampp) del **sql_mode** de la base de datos:
+Otro ajuste a tener en cuenta está realacionado con la Base de Datos. **Para evitar que aparezcan errores en el alta de entidades** (candidatos, interventores...) debemos [**desactivar la directiva STRICT_TRANS_TABLES**](https://stackoverflow.com/questions/40881773/how-to-turn-on-off-mysql-strict-mode-in-localhost-xampp) del **sql_mode** de la base de datos:
 Ejecutamos en la consola de SQL de phpmyadmin:
 ```
 SHOW VARIABLES LIKE 'sql_mode';
@@ -179,16 +179,6 @@ set global sql_mode='ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_D
 A partir de aquí ya podríamos instalar la aplicación **demokratian** desde la web (**http://localhost:8001**).
 
 > Recordar que cada vez que se cree el contenedor (bien la primera vez, o pq se ha eliminado), es necesario que la directiva STRICT_TRANS_TABLE no esté en la variable sql-mode de MySql
-
-### Código fuente Demokratian
-Por la versión de Base de datos que utilizamos (5.7.30) necesitaremos hacer un cambio en los fuentes de (./admin/candidatos.php)
-```
-# Dentro de código de candidaros.php Sustituimos la orden: $numero_id_vut =''; por
-...
-$numero_id_vut =0;
-...
-```
-A partir de ahí, el sistema debiera funcionar correctamente y podríamos utilizarla según las funcionalidades descritas en [el manual de ayuda] (https://docs.google.com/document/d/1Odyw5T7WFL82-tuo3Cgau_UzNSL-7LzCrisxAuAihg0/pub).
 
 ## Reconocimientos
 Este repositorio es posible gracias al apoyo de [Carlos Salgado](http://carlos-salgado.es/) *alma mater* de [Demokratian](http://demokratian.org/)
